@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { heroBg } from '../../assets';
+// import { heroBg } from '../../assets';
+import { bg } from '../../assets';
 
 export default function Hero() {
   const bgRef = useRef(null);
@@ -35,7 +36,7 @@ export default function Hero() {
 
   return (
     <section id="HERO">
-      <div ref={bgRef} className="hero-bg-img" style={{ backgroundImage: `url(${heroBg})` }} />
+      <div ref={bgRef} className="hero-bg-img" style={{ backgroundImage: `url(${bg})` }} />
       <div className="hero-overlay" />
       <div className="scanlines" />
       <div ref={slRef} className="hero-speed-lines" />
@@ -43,7 +44,7 @@ export default function Hero() {
       <div className="hud-tr" />
 
       <div className="hero-hud">
-        SYS:ONLINE<br />LAP:—<br />SPEED:∞<br />FUEL:MAX<br />NET:ZARNEX
+        Riyadh · Jeddah · Dubai<br />Event Production · Motorsport · Media<br />Since 2019<br />
       </div>
 
       <div className="hero-content">

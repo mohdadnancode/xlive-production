@@ -524,6 +524,7 @@ nav.sc {
 .line-blue {
   display: block;
   color: var(--blue);
+  text-shadow: 0 0 24px rgba(0,200,255,.4);
 }
 .hero-meta {
   display: flex;

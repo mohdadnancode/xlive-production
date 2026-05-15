@@ -11,6 +11,7 @@ export { default as zarnexLogo } from './zarnex-logo.jpg';
 
 // ── Hero ──
 export { default as heroBg } from './hero/hero-bg.webp';
+export { default as bg } from './hero/bg.webp';
 
 // ── Race ──
 export { default as formulaECar } from './race/FormulaECar.webp';

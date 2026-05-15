@@ -1,14 +1,14 @@
 import { useRef, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useNavScroll } from "../../hooks/useNavScroll";
 import { xliveLogo as XliveLogo } from "../../assets";
 
 const NAV_ITEMS = [
-  { label: "Racing", href: "#RACING" },
+  { label: "Racing", href: "#RACE" },
   { label: "Services", href: "#SERVICES" },
   { label: "Gallery", href: "#GALLERY" },
   { label: "Production", href: "#PRODUCTION" },
-  { label: "Contact", href: "#CTA" },
 ];
 
 export default function Navbar() {
@@ -41,7 +41,7 @@ export default function Navbar() {
       <nav
         ref={navRef}
         className="fixed top-0 left-0 right-0 z-1000 flex items-center justify-between transition-all duration-300"
-        style={{ padding: "0.9rem 4rem" }}
+        style={{ padding: "1.2rem 4rem" }}
       >
         {/* Scroll-active style injected once */}
         <style>{`
@@ -68,12 +68,12 @@ export default function Navbar() {
               filter: "brightness(1) drop-shadow(0 0 8px rgba(0,200,255,0))",
             }}
             onMouseEnter={(e) =>
-              (e.currentTarget.style.filter =
-                "brightness(1.1) drop-shadow(0 0 12px rgba(0,200,255,0.4))")
+            (e.currentTarget.style.filter =
+              "brightness(1.1) drop-shadow(0 0 12px rgba(0,200,255,0.4))")
             }
             onMouseLeave={(e) =>
-              (e.currentTarget.style.filter =
-                "brightness(1) drop-shadow(0 0 8px rgba(0,200,255,0))")
+            (e.currentTarget.style.filter =
+              "brightness(1) drop-shadow(0 0 8px rgba(0,200,255,0))")
             }
           />
         </a>
@@ -84,16 +84,16 @@ export default function Navbar() {
             <li key={item.label}>
               <a
                 href={item.href}
-                className="no-underline text-[.6rem] tracking-[.18em] uppercase transition-colors duration-200"
+                className="no-underline text-[0.78rem] tracking-[.12em] uppercase transition-colors duration-200"
                 style={{
                   fontFamily: "Space Mono,monospace",
-                  color: "var(--dim)",
+                  color: "rgba(255,255,255,.72)",
                 }}
                 onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--blue)")
+                  (e.currentTarget.style.color = "#ffffff")
                 }
                 onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--dim)")
+                  (e.currentTarget.style.color = "rgba(255,255,255,.72)")
                 }
               >
                 {item.label}
@@ -103,25 +103,30 @@ export default function Navbar() {
         </ul>
 
         {/* Desktop CTA */}
-        <a
-          href="#CONTACT"
-          className="hidden md:inline-block text-[.6rem] tracking-[.15em] uppercase px-5 py-2 border no-underline transition-all duration-200"
+        <Link
+          to="/contact"
+          className="hidden md:inline-block text-[0.78rem] tracking-[.15em] uppercase px-5 py-2 border no-underline transition-all duration-200"
           style={{
             fontFamily: "Space Mono,monospace",
-            borderColor: "var(--blue)",
-            color: "var(--blue)",
+            borderColor: "rgba(255,255,255,.18)",
+            color: "#fff",
+            background: "rgba(255,255,255,.03)",
+            backdropFilter: "blur(10px)",
+            padding: "0.8rem 1rem",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--blue)";
-            e.currentTarget.style.color = "var(--bg)";
+            e.currentTarget.style.background = "#fff";
+            e.currentTarget.style.color = "#02050c";
+            e.currentTarget.style.borderColor = "#fff";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.color = "var(--blue)";
+            e.currentTarget.style.background = "rgba(255,255,255,.03)";
+            e.currentTarget.style.color = "#fff";
+            e.currentTarget.style.borderColor = "rgba(255,255,255,.18)";
           }}
         >
-          IGNITE ›
-        </a>
+          CONTACT US ›
+        </Link>
 
         {/* Mobile hamburger — only visible on small screens */}
         <button
@@ -192,19 +197,15 @@ export default function Navbar() {
           >
             {/* NAV LINKS */}
             <div className="flex flex-col gap-1">
-              {NAV_ITEMS.map((item, i) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={close}
-                  className="group relative overflow-hidden"
-                  style={{
-                    textDecoration: "none",
-                    padding: "1.1rem 0",
-                    borderBottom: "1px solid rgba(255,255,255,.04)",
-                    animation: `fadeUp .45s ${i * 0.06}s both`,
-                  }}
-                >
+              {NAV_ITEMS.map((item, i) => {
+                const linkStyle = {
+                  textDecoration: "none",
+                  padding: "1.1rem 0",
+                  borderBottom: "1px solid rgba(255,255,255,.04)",
+                  animation: `fadeUp .45s ${i * 0.06}s both`,
+                  display: "block",
+                };
+                const spanContent = (
                   <span
                     style={{
                       fontFamily: "Barlow Condensed,sans-serif",
@@ -220,8 +221,29 @@ export default function Navbar() {
                   >
                     {item.label}
                   </span>
-                </a>
-              ))}
+                );
+                return item.isRoute ? (
+                  <Link
+                    key={item.label}
+                    to={item.href}
+                    onClick={close}
+                    className="group relative overflow-hidden"
+                    style={linkStyle}
+                  >
+                    {spanContent}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    onClick={close}
+                    className="group relative overflow-hidden"
+                    style={linkStyle}
+                  >
+                    {spanContent}
+                  </a>
+                );
+              })}
             </div>
 
             {/* CTA AREA */}
@@ -230,8 +252,8 @@ export default function Navbar() {
                 marginTop: "2.8rem",
               }}
             >
-              <a
-                href="#CTA"
+              <Link
+                to="/contact"
                 onClick={close}
                 className="block text-center"
                 style={{
@@ -249,7 +271,7 @@ export default function Navbar() {
                 }}
               >
                 IGNITE THE RACE ›
-              </a>
+              </Link>
 
               <p
                 style={{

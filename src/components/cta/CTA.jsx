@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { arialRaceView } from '../../assets';
 
 export default function CTA() {
@@ -16,7 +17,7 @@ export default function CTA() {
           at the starting line.
         </p>
         <div className="cta-buttons">
-          <a href="mailto:hello@zarnex.com" className="btn-race">Contact Us ›</a>
+          <Link to="/contact" className="btn-race">Contact Us ›</Link>
           <a href="#SERVICES" className="btn-outline">Our Services</a>
         </div>
         <div className="cta-locations">
